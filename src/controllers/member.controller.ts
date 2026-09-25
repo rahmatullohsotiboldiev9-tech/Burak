@@ -1,29 +1,7 @@
 import { Request, Response } from "express";
-import { T, } from "../libs/types/common";
+import { T } from "../libs/types/common";
 
-const membercontroller: T = {};
-membercontroller.goHome = (req: Request, res: Response) => {
-    try {
-        res.send("Home Page");
-    } catch (err) {
-        console.log("Error, goHome:", err)
-    }
-};
+// react uchun
+const memberController: T = {};
 
-membercontroller.getLogin = (req: Request, res: Response) => {
-    try {
-        res.send("Login Page");
-    } catch (err) {
-        console.log("Error, getLogin:", err)
-    }
-};
-
-membercontroller.getSignUp = (req: Request, res: Response) => {
-    try {
-        res.send("signUp Page");
-    } catch (err) {
-        console.log("Error, getSignUp:", err)
-    }
-};
-
-export default membercontroller;
+export default memberController;
