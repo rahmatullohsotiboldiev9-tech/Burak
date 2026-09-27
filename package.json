@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "start:dev": "nodemon --exec ts-node src/server.ts",
+    "start:dev": "kill-port 3003 && nodemon --exec ts-node src/server.ts",
     "build": "tsc && node extra.js",
     "start:prod": "node dist/server.js",
     "train": "nodemon --exec ts-node src/train.ts",
@@ -44,6 +44,7 @@
     "@types/multer": "^1.4.11",
     "@types/socket.io": "^3.0.2",
     "@types/uuid": "^9.0.7",
+    "kill-port": "^2.0.1",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",

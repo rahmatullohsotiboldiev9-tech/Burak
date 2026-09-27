@@ -1,5 +1,19 @@
-console.log("Whats up?");
+console.log("this time was n't easy 😓");
 
+
+function calculateSumOfNumbers(array: unknown[]): number {
+    return array.reduce((sum: number, value: unknown): number => {
+        if (typeof value === "number") {
+            return sum + value;
+        }
+
+        return sum;
+    }, 0);
+}
+
+console.log(
+    calculateSumOfNumbers([10, "10", { son: 10 }, true, 35])
+);
 
 
 
@@ -21,8 +35,12 @@ console.log("Whats up?");
       folder, file => KEBAB
       css => SNAKE
   - Error handling
-
 */
+/* Traditional API
+   Rest API
+   GraphQL API
+   ....
+   */
 
 
 
