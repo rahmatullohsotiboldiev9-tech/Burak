@@ -1,19 +1,28 @@
-console.log("this time was n't easy 😓");
+console.log("what's up?");
+// Task P
+
+// function objectToArray(obj: object): [string, any][] {
+//     return Object.entries(obj);
+// }
+
+// console.log(objectToArray({ a: 10, b: 20 }));
 
 
-function calculateSumOfNumbers(array: unknown[]): number {
-    return array.reduce((sum: number, value: unknown): number => {
-        if (typeof value === "number") {
-            return sum + value;
-        }
 
-        return sum;
-    }, 0);
-}
 
-console.log(
-    calculateSumOfNumbers([10, "10", { son: 10 }, true, 35])
-);
+// function calculateSumOfNumbers(array: unknown[]): number {
+//     return array.reduce((sum: number, value: unknown): number => {
+//         if (typeof value === "number") {
+//             return sum + value;
+//         }
+
+//         return sum;
+//     }, 0);
+// }
+
+// console.log(
+//     calculateSumOfNumbers([10, "10", { son: 10 }, true, 35])
+// );
 
 
 
