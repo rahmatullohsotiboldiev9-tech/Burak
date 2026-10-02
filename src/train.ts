@@ -1,11 +1,24 @@
 console.log("what's up?");
-/// Task P
 
-function objectToArray(obj: object): [string, any][] {
-    return Object.entries(obj);
+
+
+function hasProperty(obj: object, prop: string): boolean {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-console.log(objectToArray({ a: 10, b: 20 }));
+console.log(hasProperty({ name: "BMW" }, "name"));
+console.log(hasProperty({ name: "BMW" }, "color"));
+
+
+
+
+// /// Task P
+
+// function objectToArray(obj: object): [string, any][] {
+//     return Object.entries(obj);
+// }
+
+// console.log(objectToArray({ a: 10, b: 20 }));
 
 
 
