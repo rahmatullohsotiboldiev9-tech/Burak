@@ -1,5 +1,5 @@
 console.log("what's up?");
-///Task P
+/// Task P
 
 function objectToArray(obj: object): [string, any][] {
     return Object.entries(obj);
@@ -50,6 +50,10 @@ console.log(objectToArray({ a: 10, b: 20 }));
    GraphQL API
    ....
    */
+/*
+Traditional front-end => BSSR => Ejs
+modern fromt-end =>  => SPA=> React
+*/
 
 
 
