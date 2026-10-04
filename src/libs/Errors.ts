@@ -19,6 +19,7 @@ export enum Message {
     NO_MEMBER_NICK = "No member with that member nick",
     WRONG_PASSWORD = "Wrong passsword, please try again",
     MEMBER_NOT_ACTIVE = "This member account is not active",
+    NOT_AUTHENTICATED = "You are not authenticated, Please login first!",
 }
 
 class Errors extends Error {
