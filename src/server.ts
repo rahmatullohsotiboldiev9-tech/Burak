@@ -6,7 +6,7 @@
 // Architectural pattern: MVC: model view controller, DI:Dependency Injection , MVP:model view presenter
 // Design pattern: Middleware, Decotar
 
-import dotenv from 'dotenv'     //Oldingi const moment = require ('moment');
+import dotenv from "dotenv"//Oldingi const moment = require ('moment');
 dotenv.config();
 import mongoose from "mongoose";
 import app from "./app";
