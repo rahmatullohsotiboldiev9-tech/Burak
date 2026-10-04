@@ -1,13 +1,36 @@
 console.log("what's up?");
 
+function calculate(expression: string): number {
+    const numbers = expression.split("+").map((item): number => {
+        const number = Number(item.trim());
 
+        if (Number.isNaN(number)) {
+            throw new Error("Noto‘g‘ri son");
+        }
 
-function hasProperty(obj: object, prop: string): boolean {
-    return Object.prototype.hasOwnProperty.call(obj, prop);
+        return number;
+    });
+
+    return numbers.reduce((sum: number, number: number): number => sum + number, 0);
 }
 
-console.log(hasProperty({ name: "BMW" }, "name"));
-console.log(hasProperty({ name: "BMW" }, "color"));
+console.log(calculate("1 + 3"));
+console.log(calculate("10 + 20 + 5"));
+
+
+
+
+
+
+
+
+
+// function hasProperty(obj: object, prop: string): boolean {
+//     return Object.prototype.hasOwnProperty.call(obj, prop);
+// }
+
+// console.log(hasProperty({ name: "BMW" }, "name"));
+// console.log(hasProperty({ name: "BMW" }, "color"));
 
 
 
@@ -49,24 +72,7 @@ console.log(hasProperty({ name: "BMW" }, "color"));
 
 
 
-/* Project Standards:
-  - Logging standards
-  - Naming standards:
-      function, method, variable => CAMEL
-      class => PASCAL
-      folder, file => KEBAB
-      css => SNAKE
-  - Error handling
-*/
-/* Traditional API
-   Rest API
-   GraphQL API
-   ....
-   */
-/*
-Traditional front-end => BSSR => Ejs
-modern fromt-end =>  => SPA=> React
-*/
+
 
 
 
@@ -85,16 +91,3 @@ console.log(palindromCheck("hello"));
 
 
 
-// interface SquareResult {
-//     number: number;
-//     square: number;
-// }
-
-// function getSquareNumbers(arr: number[]): SquareResult[] {
-//     return arr.map((number) => ({
-//         number: number,
-//         square: number * number,
-//     }));
-// }
-
-// console.log(getSquareNumbers([1, 2, 3]));
