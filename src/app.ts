@@ -35,7 +35,7 @@ app.use(
     })
 );
 /** 3-VIEWS **/
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "../src/views")); //../src/ qo'shildi
 app.set("view engine", "ejs");
 
 /** 4-ROUTERS **/

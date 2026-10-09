@@ -89,9 +89,6 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
     }
 };
 
-
-
-
 restaurantController.checkAuthSession = async (
     req: AdminRequest,
     res: Response
