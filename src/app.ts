@@ -3,7 +3,7 @@ import path from "path";
 import router from "./router";
 import routerAdmin from "./router-Admin";
 import morgan from "morgan";
-import { MORGAN_FORMAT } from "./libs/types/config";
+import { MORGAN_FORMAT } from "./libs/utils/config";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -15,37 +15,39 @@ const store = new MongoDBStore({
     collection: "sessions",
 });
 
-/** 1-ENTRANCE **/
+/**  1. ENTERANCE **/
 const app = express();
-const morganFormat = process.env.MORGAN_FORMAT || "dev";
-console.log("__dirname:", __dirname);
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.static(path.join(__dirname, "public"))); // Public Folder
+app.use(express.urlencoded({ extended: true })); // Traditional API
+app.use(express.json()); // Rest API
 app.use(morgan(MORGAN_FORMAT));
-/** 2-SESSIONS **/
+
+/**  2. SESSIONS **/
 app.use(
     session({
         secret: String(process.env.SESSION_SECRET),
         cookie: {
-            maxAge: 1000 * 3600 * 6,// 6 h 
+            maxAge: 1000 * 3600 * 6, // 6 hours
         },
         store: store,
-        resave: true, // 10 : 30 auth => 13:30 12:00 => 15:00
+        resave: true, // 10:30 auth = > 13:30
         saveUninitialized: true,
-    })
+    }),
 );
+
 app.use(function (req, res, next) {
     const sessionInstance = req.session as T;
     res.locals.member = sessionInstance.member;
     next();
 });
-/** 3-VIEWS **/
-app.set("views", path.join(__dirname, "../src/views")); //../src/ qo'shildi
+
+/**  3. VIEWS    **/
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-/** 4-ROUTERS **/
-app.use("/admin", routerAdmin);// SSR: EJS
-app.use("/", router); //SPA :REACT
+/**  4. ROUTERS **/
+// BSSR: EJS
+app.use("/admin", routerAdmin); // BSSR
+app.use("/", router); // SPA: REACT
 
 export default app;

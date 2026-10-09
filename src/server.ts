@@ -6,7 +6,7 @@
 // Architectural pattern: MVC: model view controller, DI:Dependency Injection , MVP:model view presenter
 // Design pattern: Middleware, Decotar
 
-import dotenv from "dotenv"//Oldingi const moment = require ('moment');
+import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
 import app from "./app";
@@ -14,11 +14,13 @@ import app from "./app";
 mongoose
     .connect(process.env.MONGO_URL as string, {})
     .then((data) => {
-        console.log("MongoDB connection succeed");
+        console.log("MongoDB connection succeed!");
         const PORT = process.env.PORT ?? 3003;
         app.listen(PORT, function () {
             console.info(`The server is running successfully on port: ${PORT}`);
-            console.info(`Admin project: http://localhost:${PORT}/admin /n`);
+            console.info(`Admin project on http://localhost:${PORT}/admin \n`);
         });
     })
-    .catch((err) => console.log("ERROR on connection MongoDB", err));
+    .catch((err) => {
+        console.log("Error on connection MongoDB", err);
+    });

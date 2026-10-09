@@ -1,21 +1,45 @@
 console.log("what's up?");
 
-function calculate(expression: string): number {
-    const numbers = expression.split("+").map((item): number => {
-        const number = Number(item.trim());
 
-        if (Number.isNaN(number)) {
-            throw new Error("Noto‘g‘ri son");
-        }
-
-        return number;
-    });
-
-    return numbers.reduce((sum: number, number: number): number => sum + number, 0);
+function missingNumber(nums: number[]): number {
+    const n = nums.length;
+    const expected = (n * (n + 1)) / 2; // 0 dan n gacha bo'lgan sonlar yig'indisi
+    const actual = nums.reduce((sum, x) => sum + x, 0);
+    return expected - actual;
 }
 
-console.log(calculate("1 + 3"));
-console.log(calculate("10 + 20 + 5"));
+console.log(missingNumber([3, 0, 1]));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function calculate(expression: string): number {
+//     const numbers = expression.split("+").map((item): number => {
+//         const number = Number(item.trim());
+
+//         if (Number.isNaN(number)) {
+//             throw new Error("Noto‘g‘ri son");
+//         }
+
+//         return number;
+//     });
+
+//     return numbers.reduce((sum: number, number: number): number => sum + number, 0);
+// }
+
+// console.log(calculate("1 + 3"));
+// console.log(calculate("10 + 20 + 5"));
 
 
 

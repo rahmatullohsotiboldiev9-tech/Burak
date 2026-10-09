@@ -2,3 +2,5 @@ node_Modules
 dist
 
 .env
+
+uploads
