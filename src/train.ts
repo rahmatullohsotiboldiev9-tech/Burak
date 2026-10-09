@@ -103,14 +103,14 @@ console.log(missingNumber([3, 0, 1]));
 
 
 
-// Task N
+// // Task N
 
-function palindromCheck(str: String) {
-    return str === str.split("").reverse().join("");
-}
+// function palindromCheck(str: String) {
+//     return str === str.split("").reverse().join("");
+// }
 
-console.log(palindromCheck("dad"));
-console.log(palindromCheck("hello"));
+// console.log(palindromCheck("dad"));
+// console.log(palindromCheck("hello"));
 
 
 

@@ -54,7 +54,7 @@ class MemberService {
         }
 
         return currentMember as unknown as Member;
-    }
+    };
 
     /**SSR   */
 
