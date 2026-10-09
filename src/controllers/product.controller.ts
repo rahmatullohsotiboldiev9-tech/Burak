@@ -3,7 +3,6 @@ import Errors from "../libs/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/product.service";
 
-
 const productService = new ProductService();
 
 const productController: T = {};
@@ -17,7 +16,6 @@ productController.getAllProducts = async (req: Request, res: Response) => {
         else res.status(Errors.standard.code).json(Errors.standard);
     }
 };
-
 productController.createNewProduct = async (req: Request, res: Response) => {
     try {
         console.log("createNewProduct");
@@ -27,7 +25,6 @@ productController.createNewProduct = async (req: Request, res: Response) => {
         else res.status(Errors.standard.code).json(Errors.standard);
     }
 };
-
 productController.updateChosenProduct = async (req: Request, res: Response) => {
     try {
         console.log("updateChosenProduct");
@@ -37,5 +34,4 @@ productController.updateChosenProduct = async (req: Request, res: Response) => {
         else res.status(Errors.standard.code).json(Errors.standard);
     }
 };
-
 export default productController;
