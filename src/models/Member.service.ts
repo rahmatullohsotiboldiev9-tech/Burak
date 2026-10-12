@@ -19,7 +19,7 @@ class MemberService {
         try {
             const result = await this.memberModel.create(input);
             result.memberPassword = "";
-            return result.toJSON() as unknown as Member;
+            return result.toObject();
         } catch (err) {
             console.error("Error, model:signup", err);
             throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE);
@@ -37,8 +37,8 @@ class MemberService {
         if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
 
         const isMatch = await bcrypt.compare(
-            input.memberPassword,
-            member.memberPassword
+            input.memberPassword ?? "",
+            member.memberPassword ?? ""
         );
         if (!isMatch) {
             throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
@@ -53,8 +53,8 @@ class MemberService {
             throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
         }
 
-        return currentMember as unknown as Member;
-    };
+        return currentMember;
+    }
 
     /**SSR   */
 
@@ -70,7 +70,7 @@ class MemberService {
         try {
             const result = await this.memberModel.create(input);
             result.memberPassword = "";
-            return result as unknown as Member;
+            return result;
         } catch (err) {
             throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
         }
@@ -86,8 +86,8 @@ class MemberService {
         if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
 
         const isMatch = await bcrypt.compare(
-            input.memberPassword,
-            member.memberPassword
+            input.memberPassword ?? "",
+            member.memberPassword ?? ""
         );
         if (!isMatch) {
             throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
@@ -101,7 +101,7 @@ class MemberService {
             throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
         }
 
-        return currentMember as unknown as Member;
+        return currentMember;
     }
 }
 export default MemberService;
