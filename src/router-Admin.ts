@@ -4,8 +4,7 @@ import restaurantController from "./controllers/restaurant.controller";
 import productController from "./controllers/product.controller";
 import makeUploader from "./libs/utils/uploader";
 
-/*  Member Controller */
-
+/*  Restaurant */
 routerAdmin.get("/", restaurantController.goHome);
 routerAdmin
     .get("/login", restaurantController.getLogin)
@@ -17,7 +16,6 @@ routerAdmin
         makeUploader("members").single("memberImage"),
         restaurantController.processSignup,
     );
-
 routerAdmin.get("/logout", restaurantController.logout);
 routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
