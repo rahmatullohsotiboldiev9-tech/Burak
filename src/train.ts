@@ -1,25 +1,25 @@
-console.log("what's up?");
+console.log("Salom 🤝");
 
+console.log("TASK T")
 
-function missingNumber(nums: number[]): number {
-    const n = nums.length;
-    const expected = (n * (n + 1)) / 2; // 0 dan n gacha bo'lgan sonlar yig'indisi
-    const actual = nums.reduce((sum, x) => sum + x, 0);
-    return expected - actual;
+function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+    return [...arr1, ...arr2].sort((a, b) => a - b);
 }
 
-console.log(missingNumber([3, 0, 1]));
+console.log(mergeSortedArrays([0, 3, 4], [4, 6]));
 
 
 
 
 
+// function missingNumber(nums: number[]): number {
+//     const n = nums.length;
+//     const expected = (n * (n + 1)) / 2; // 0 dan n gacha bo'lgan sonlar yig'indisi
+//     const actual = nums.reduce((sum, x) => sum + x, 0);
+//     return expected - actual;
+// }
 
-
-
-
-
-
+// console.log(missingNumber([3, 0, 1]));
 
 
 
