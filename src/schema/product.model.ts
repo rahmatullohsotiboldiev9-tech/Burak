@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { Product } from "../libs/types/product";
 import {
     ProductCollection,
     ProductSize,
@@ -6,7 +7,7 @@ import {
     ProductVolume,
 } from "../libs/enums/product.enums";
 
-const productSchema = new Schema(
+const productSchema = new Schema<Product>(
     {
         productStatus: {
             type: String,
