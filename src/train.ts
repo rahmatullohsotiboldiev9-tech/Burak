@@ -1,7 +1,7 @@
 console.log("Salom 🤝");
 
 
-
+console.log("TASK V")
 
 function countChars(str: string) {
     const result: Record<string, number> = {};
