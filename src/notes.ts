@@ -7,17 +7,25 @@
       css => SNAKE
   - Error handling
 */
-/* Traditional API
+/*REQUESTS 
+Traditional API
    Rest API
    GraphQL API
    ....
    */
-/*
+/*FRONTEND DEVELOPEMENT
+
 Traditional front-end => BSSR => Ejs
 modern fromt-end =>  => SPA=> React
 */
 
-/*
+/* Cookies
 request join
 self destroy
+*/
+
+/* Validation:
+   Frontend validation
+   Backend validation
+   Database validation
 */
