@@ -1,12 +1,31 @@
 console.log("Salom 🤝");
 
-console.log("TASK T")
 
-function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
-    return [...arr1, ...arr2].sort((a, b) => a - b);
+
+
+function countChars(str: string) {
+    const result: Record<string, number> = {};
+    for (const char of str) {
+        result[char] = (result[char] || 0) + 1;
+    }
+    return result;
 }
 
-console.log(mergeSortedArrays([0, 3, 4], [4, 6]));
+console.log(countChars("hello"));
+
+
+
+
+
+
+
+// console.log("TASK T")
+
+// function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
+//     return [...arr1, ...arr2].sort((a, b) => a - b);
+// }
+
+// console.log(mergeSortedArrays([0, 3, 4], [4, 6]));
 
 
 

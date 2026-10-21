@@ -41,18 +41,19 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 
 restaurantController.processSignup = async (
     req: AdminRequest,
-    res: Response,
+    res: Response
 ) => {
     try {
         console.log("processSignup");
-        console.log("body:", req.body);
         const file = req.file;
+
         if (!file)
             throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
         const newMember: MemberInput = req.body;
-        newMember.memberImage = file?.path.replace(/\\/g, "/"); // bu - replace(/\\/g, "/"); Windows pathni to'g'ri formatlash uchun
+        newMember.memberImage = file?.path.replace(/\\/g, "/");
         newMember.memberType = MemberType.RESTAURANT;
+
         const result = await memberService.processSignup(newMember);
 
         req.session.member = result;
@@ -61,13 +62,16 @@ restaurantController.processSignup = async (
         });
     } catch (err) {
         console.log("Error, processSignup:", err);
+
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+
         res.send(
-            `<script> alert("${message}"); window.location.replace('admin/signup) </script>`,
+            `<script> alert("${message}"); window.location.replace('/admin/signup') </script>`
         );
     }
 };
+
 
 restaurantController.processLogin = async (
     req: AdminRequest,
