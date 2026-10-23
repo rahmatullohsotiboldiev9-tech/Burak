@@ -32,11 +32,11 @@ productController.createNewProduct = async (
 ) => {
     try {
         console.log("createNewProduct");
+        console.log("req.body:", req.body);
         if (!req.files?.length)
             throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
 
         const data: ProductInput = req.body;
-        console.log("BODY:", req.body);
         data.productImages = req.files?.map((ele) => {
             return ele.path.replace(/\\/g, "/"); // bu - replace(/\\/g, "/"); Windows pathni to'g'ri formatlash uchun
         });
@@ -50,7 +50,7 @@ productController.createNewProduct = async (
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
-            `<script> alert("${message}"); window.location.replace('admin/product/all') </script>`
+            `<script> alert("${message}"); window.location.replace('/admin/product/all') </script>`
         );
     }
 };
