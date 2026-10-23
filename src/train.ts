@@ -1,5 +1,5 @@
 console.log("Salom 🤝");
-
+//npx tsx src/train.ts
 
 console.log("TASK V")
 
