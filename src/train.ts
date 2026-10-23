@@ -1,17 +1,30 @@
 console.log("Salom 🤝");
+
+console.log("TASK W")
+
+const chunkArray = <T>(arr: T[], size: number): T[][] =>
+    Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+        arr.slice(i * size, i * size + size)
+    );
+
+console.log(chunkArray([1, 2, 3, 4, 5], 2));
+
+
+
 //npx tsx src/train.ts
 
-console.log("TASK V")
 
-function countChars(str: string) {
-    const result: Record<string, number> = {};
-    for (const char of str) {
-        result[char] = (result[char] || 0) + 1;
-    }
-    return result;
-}
+// console.log("TASK V")
 
-console.log(countChars("hello"));
+// function countChars(str: string) {
+//     const result: Record<string, number> = {};
+//     for (const char of str) {
+//         result[char] = (result[char] || 0) + 1;
+//     }
+//     return result;
+// }
+
+// console.log(countChars("hello"));
 
 
 

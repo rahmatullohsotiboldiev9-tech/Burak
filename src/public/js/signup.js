@@ -14,7 +14,7 @@ $(function () {
             } else {
                 if (uploadFile) {
                     console.log(URL.createObjectURL(uploadFile));
-                    $('.upload-img-frame').attr('src', URL.createObjectURL(uploadFile)).addClass('success');
+                    $('.upload-img-frame').attr('src', URL.createObjectURL(uploadFile)).addClass('Success');
                 }
                 filename = $(this)[0].files[0].name;
             }
