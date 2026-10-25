@@ -1,67 +1,271 @@
+/* ==========================================================================
+   Home page (/admin)
+
+   1. Page and design tokens
+   2. Navigation
+   3. Sphere
+   4. User preferences (reduced motion, forced colors)
+
+   Written with native CSS nesting, one level deep under .home-container.
+   ========================================================================== */
+
+/* 1. Page and design tokens ------------------------------------------------ */
+
 .home-container {
+  /* Color */
+  --color-midnight: #06121a;
+  --color-deep: #0a1f2b;
+  --color-petrol: #0d3b44;
+  --color-lagoon: #17555d;
+  --color-saffron: #f4b942;
+  --color-saffron-soft: #ffd98a;
+  --color-mist: #eaf1ef;
+  --color-ink: #1b1305;
+
+  /* Surfaces and lines */
+  --surface-glass: rgb(255 255 255 / 0.06);
+  --surface-hover: rgb(255 255 255 / 0.1);
+  --surface-current: rgb(255 255 255 / 0.12);
+  --line-glass: rgb(255 255 255 / 0.14);
+  --text-dim: rgb(234 241 239 / 0.4);
+
+  /* Space and shape */
+  --space-2xs: 0.25rem;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 160ms;
+
+  /* Sphere (the JS scales the sphere to fit its frame) */
+  --sphere-frame: min(775px, 92vw);
+  --sphere-base: min(580px, 70vw);
+  --sphere-stroke: rgb(150 215 210 / 0.25);
+
   position: relative;
-  width: auto;
-  height: auto;
-  min-height: 100%;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(-45deg, #110303f0, #dd6d04, #011c1afc, #7a6868);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: clip;
+  color: var(--color-mist);
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(160deg,
+      var(--color-midnight),
+      var(--color-deep) 55%,
+      var(--color-petrol));
+
+  /* Slow drifting light. Only transform animates, so it stays on the GPU. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -25%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 35% at 78% 72%,
+        rgb(244 185 66 / 0.14),
+        transparent 70%),
+      radial-gradient(45% 40% at 18% 20%,
+        rgb(23 85 93 / 0.55),
+        transparent 70%);
+    animation: home-drift 40s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-.home-container a {
-  text-decoration: none;
-  color: #000000;
+@keyframes home-drift {
+  from {
+    transform: translate3d(-3%, -2%, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate3d(3%, 2%, 0) rotate(6deg);
+  }
 }
 
-.home-container .nav-item a {
-  color: #e3c08d;
+/* 2. Navigation ------------------------------------------------------------ */
+
+.home-container {
+  .navigation-menu {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    max-width: calc(100% - 2rem);
+    margin-block-start: clamp(1rem, 3vw, 1.75rem);
+    padding: var(--space-2xs);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    background: var(--surface-glass);
+    border: 1px solid var(--line-glass);
+    border-radius: var(--radius-pill);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      0 12px 32px rgb(0 0 0 / 0.28);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  /* Bootstrap's .nav list, reset to what this design needs */
+  .navigation-menu .nav {
+    flex-wrap: nowrap;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-item {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .nav-item a {
+    display: block;
+    padding: 0.55em 1.2em;
+    color: var(--color-mist);
+    border-radius: var(--radius-pill);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-item a:focus-visible {
+    outline: 2px solid var(--color-saffron);
+    outline-offset: 2px;
+    box-shadow: none;
+    /* replaces Bootstrap's blue focus ring */
+  }
+
+  .nav-item a:active {
+    transform: scale(0.97);
+  }
+
+  .nav-item a[aria-current="page"] {
+    background-color: var(--surface-current);
+  }
+
+  .nav-item a.disabled {
+    color: var(--text-dim);
+    pointer-events: none;
+  }
+
+  /* The one primary action: Log in */
+  .nav-item a.nav-cta {
+    color: var(--color-ink);
+    font-weight: 600;
+    background-color: var(--color-saffron);
+  }
+
+  @media (hover: hover) {
+    .nav-item a:hover {
+      background-color: var(--surface-hover);
+    }
+
+    .nav-item a.nav-cta:hover {
+      background-color: var(--color-saffron-soft);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-item a {
+      padding: 0.5em 0.85em;
+      font-size: 0.9rem;
+    }
+  }
 }
 
-.home-container .nav-item a.disabled {
-  color: #898071;
-}
+/* 3. Sphere ---------------------------------------------------------------- */
 
-.home-container .navigation-menu {
-  position: relative;
-  z-index: 10000;
-  color: #efefee;
-  font-size: 40px;
-  font-family: monospace;
-}
+.home-container {
+  .animation-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    margin-block-start: clamp(1.5rem, 5vw, 3.5rem);
+  }
 
-.home-container .animation-frame {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 55px;
-}
+  .animation-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sphere-frame);
+    aspect-ratio: 1;
+  }
 
-.home-container .animation-wrapper {
-  position: relative;
-  width: 775px;
-  height: 775px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  /* Saffron glow behind the sphere */
+  .animation-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(closest-side,
+        rgb(244 185 66 / 0.32),
+        rgb(244 185 66 / 0.08) 55%,
+        transparent);
+  }
 
-.home-container .sphere-animation {
-  position: relative;
-  width: 580px;
-  height: 580px;
-}
+  .sphere-animation {
+    position: relative;
+    width: var(--sphere-base);
+    aspect-ratio: 1;
+  }
 
-.home-container .sphere path {
-  fill: url(#sphereGradient);
-  stroke-width: 1px;
-  stroke: rgba(80, 80, 80, 0.35);
-  backface-visibility: hidden;
-}
+  .sphere {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 
-@media (min-width: 500px) {
   .sphere path {
-    stroke-width: 0.4px;
+    fill: url(#sphereGradient);
+    stroke: var(--sphere-stroke);
+    stroke-width: 1px;
+    backface-visibility: hidden;
+  }
+
+  @media (min-width: 500px) {
+    .sphere path {
+      stroke-width: 0.4px;
+    }
+  }
+}
+
+/* 4. User preferences ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-container::before {
+    animation: none;
+  }
+
+  .home-container .nav-item a {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .home-container .navigation-menu {
+    border-color: CanvasText;
+  }
+
+  .home-container .nav-item a.nav-cta {
+    border: 1px solid ButtonText;
   }
 }

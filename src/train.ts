@@ -1,13 +1,30 @@
+
+//npx tsx src/train.ts
+
 console.log("Salom 🤝");
 
-console.log("TASK W")
+const countOccurrences = (obj: any, key: string): number =>
+    obj && typeof obj === "object"
+        ? Object.entries(obj).reduce(
+            (sum, [k, v]) => sum + (k === key ? 1 : 0) + countOccurrences(v, key),
+            0
+        )
+        : 0;
 
-const chunkArray = <T>(arr: T[], size: number): T[][] =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-        arr.slice(i * size, i * size + size)
-    );
+console.log(countOccurrences({ model: "A", s: { model: "B" } }, "model"));
 
-console.log(chunkArray([1, 2, 3, 4, 5], 2));
+
+
+
+
+// console.log("TASK W")
+
+// const chunkArray = <T>(arr: T[], size: number): T[][] =>
+//     Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+//         arr.slice(i * size, i * size + size)
+//     );
+
+// console.log(chunkArray([1, 2, 3, 4, 5], 2));
 
 
 
