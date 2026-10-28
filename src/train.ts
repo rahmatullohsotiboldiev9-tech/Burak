@@ -3,6 +3,7 @@
 
 console.log("Salom 🤝");
 
+"Task Y"
 
 
 function findIntersection(arr1: number[], arr2: number[]): number[] {
