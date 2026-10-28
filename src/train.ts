@@ -3,15 +3,36 @@
 
 console.log("Salom 🤝");
 
-const countOccurrences = (obj: any, key: string): number =>
-    obj && typeof obj === "object"
-        ? Object.entries(obj).reduce(
-            (sum, [k, v]) => sum + (k === key ? 1 : 0) + countOccurrences(v, key),
-            0
-        )
-        : 0;
 
-console.log(countOccurrences({ model: "A", s: { model: "B" } }, "model"));
+
+function findIntersection(arr1: number[], arr2: number[]): number[] {
+    const set2 = new Set(arr2);
+    return [...new Set(arr1.filter((item) => set2.has(item)))];
+}
+
+console.log(findIntersection([1, 2, 3], [3, 2, 0]));
+
+
+
+
+
+
+
+
+
+
+function item(value: number, index: number, array: number[]): value is number {
+    throw new Error("Function not implemented.");
+}
+// const countOccurrences = (obj: any, key: string): number =>
+//     obj && typeof obj === "object"
+//         ? Object.entries(obj).reduce(
+//             (sum, [k, v]) => sum + (k === key ? 1 : 0) + countOccurrences(v, key),
+//             0
+//         )
+//         : 0;
+
+// console.log(countOccurrences({ model: "A", s: { model: "B" } }, "model"));
 
 
 
