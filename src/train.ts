@@ -1,17 +1,34 @@
 
 //npx tsx src/train.ts
+console.log("Salom")
 
-console.log("Salom 🤝");
-
-console.log("Task Y")
+console.log("Task Z")
 
 
-function findIntersection(arr1: number[], arr2: number[]): number[] {
-    const set2 = new Set(arr2);
-    return [...new Set(arr1.filter((item) => set2.has(item)))];
+
+function sumEvens(arr: number[]): number {
+    let sum = 0;
+    for (const num of arr) {
+        if (num % 2 === 0) sum += num;
+    }
+    return sum;
 }
+console.log(sumEvens([1, 2, 3]));
 
-console.log(findIntersection([1, 2, 3], [3, 2, 0]));
+
+
+
+// console.log("Salom 🤝");
+
+// console.log("Task Y")
+
+
+// function findIntersection(arr1: number[], arr2: number[]): number[] {
+//     const set2 = new Set(arr2);
+//     return [...new Set(arr1.filter((item) => set2.has(item)))];
+// }
+
+// console.log(findIntersection([1, 2, 3], [3, 2, 0]));
 
 
 
