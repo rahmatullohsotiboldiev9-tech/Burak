@@ -4,7 +4,7 @@ import router from "./router";
 import routerAdmin from "./router-Admin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/utils/config";
-
+import cookieParser from "cookie-parser";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
@@ -20,6 +20,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public"))); // Public Folder
 app.use(express.urlencoded({ extended: true })); // Traditional API
 app.use(express.json()); // Rest API
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
 /**  2. SESSIONS **/
