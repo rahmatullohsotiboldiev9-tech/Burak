@@ -131,10 +131,17 @@ memberController.verifyAuth = async (
     next: NextFunction
 ) => {
     try {
-
         const token = req.cookies["accessToken"];
-        if (token) req.member = await authService.checkAuth(token);
-        if (!req.member) throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
+
+        if (!token) {
+            throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
+        }
+
+        req.member = await authService.checkAuth(token);
+
+        if (!req.member) {
+            throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
+        }
 
         next();
     } catch (err) {
@@ -143,7 +150,6 @@ memberController.verifyAuth = async (
         else res.status(Errors.standard.code).json(Errors.standard);
     }
 };
-
 
 memberController.retrieveAuth = async (
     req: ExtendedRequest,
