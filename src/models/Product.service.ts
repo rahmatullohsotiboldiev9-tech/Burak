@@ -4,6 +4,8 @@ import ProductModel from "../schema/product.model";
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 import { ProductStatus } from "../libs/enums/product.enums";
 import { T } from "../libs/types/common";
+import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 
 class ProductService {
     private readonly productModel;
@@ -16,10 +18,10 @@ class ProductService {
     public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
         const match: T = { productStatus: ProductStatus.PROCESS };
 
-        if (inquiry.productCollection){
+        if (inquiry.productCollection) {
             match.productCollection = inquiry.productCollection;
-if (inquiry.search) match.productName = { $regex: new RegExp(inquiry.search, "i") };
-    }
+            if (inquiry.search) match.productName = { $regex: new RegExp(inquiry.search, "i") };
+        }
         const sort: T =
             inquiry.order === "productPrice"
                 ? { [inquiry.order]: 1 }
@@ -39,7 +41,26 @@ if (inquiry.search) match.productName = { $regex: new RegExp(inquiry.search, "i"
     }
 
 
-    /** SSR */
+    public async getProduct(
+        memberId: Types.ObjectId | null,
+        id: string
+    ): Promise<Product> {
+        const productId = shapeIntoMongooseObjectId(id);
+
+        let result = await this.productModel
+            .findOne({
+                _id: productId,
+                productStatus: ProductStatus.PROCESS,
+            })
+            .exec();
+        if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+
+        // TODO: If authenticated users => 1 st => view log creation
+        return result;
+    }
+
+
     /** SSR **/
     public async getAllProducts(): Promise<Product[]> {
         const result = await this.productModel.find().exec();
