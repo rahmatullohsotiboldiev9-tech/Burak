@@ -1,6 +1,6 @@
 import Errors, { HttpCode, Message } from "../libs/utils/Errors";
 import { Product, ProductInput, ProductInquiry, ProductUpdateInput } from "../libs/types/product";
-import ProductModel from "../schema/product.model";
+import ProductModel from "../schema/Product.model";
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 import { ProductStatus } from "../libs/enums/product.enums";
 import { T } from "../libs/types/common";

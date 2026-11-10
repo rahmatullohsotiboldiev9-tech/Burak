@@ -52,7 +52,7 @@ const memberSchema = new Schema<Member>(
             default: 0,
         },
     },
-    { timestamps: true, collection: "members" }, // updatedAt, createdAt
+    { timestamps: true, }, // updatedAt, createdAt. collection: "members"
 );
 
 export default mongoose.model<Member>("Member", memberSchema);
