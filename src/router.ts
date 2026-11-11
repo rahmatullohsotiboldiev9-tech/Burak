@@ -23,13 +23,23 @@ router.post("/member/update",
     uploader("members").single("memberImage"),
     memberController.updateMember);
 
-router.get("/member/top-users", memberController.getTopUsers);
+router.get("/member/top-users",
+    memberController.getTopUsers);
 /** Product **/
-router.get("/product/all", productController.getProducts);
-router.get("/product/:id", memberController.retrieveAuth, productController.getProduct);
+router.get("/product/all",
+    productController.getProducts);
+router.get("/product/:id",
+    memberController.retrieveAuth,
+    productController.getProduct);
 
 
 /** Order **/
-router.post("/order/create", memberController.verifyAuth,
+router.post("/order/create",
+    memberController.verifyAuth,
     orderController.createOrder);
+router.get("/order/all",
+    memberController.verifyAuth,
+    orderController.getMyOrders);
+
+
 export default router;
